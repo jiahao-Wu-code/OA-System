@@ -5,14 +5,21 @@ import './css/login.less';
 import AccountLogin from './component/AccountLogin';
 import SmCodeLogin from './component/SmCodeLogin';
 import logoImg from 'common/img/logo.svg';
+import { useDispatch, useSelector } from 'umi';
 
 const FormItem = Form.Item;
 
 const login = ({ history }) => {
   const [type, setType] = useState(0);
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.loading);
+  // console.log("loading", loading)
+  // console.log("first", dispatch);
   //- 发送用户信息到后端
   const submitUserInfo = (data) => {
-    console.log(data);
+    // console.log(data);
+    // 登录请求参数处理， type + 登录模式（手机号验证码/账号密码）
+    dispatch({ type: 'user/login', payload: { ...data, type } });
   };
 
   const componentSelector = (props) =>
@@ -27,7 +34,11 @@ const login = ({ history }) => {
       <Form form={form} onFinish={submitUserInfo}>
         {componentSelector({ FormItem, Input, form })}
         <Row>
-          <Button type="primary" htmlType="submit">
+          <Button
+            type="primary"
+            htmlType="submit"
+            loading={loading.effects['user/login']}
+          >
             登录
           </Button>
         </Row>

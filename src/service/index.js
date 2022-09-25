@@ -6,7 +6,7 @@ const module = {};
 
 requireApi.keys().forEach((key) => {
   if (key === './index.js' || key === './http.js') return;
-  Object.assign(module, requireAp(key));
+  Object.assign(module, requireApi(key));
 });
 
 export default module;
