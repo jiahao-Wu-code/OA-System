@@ -29,4 +29,21 @@ export const loginRule = {
     { max: 6, message: '最大长度为6位' },
     { min: 6, message: '最小长度为6位' },
   ],
+  confirmPasswordRule(form) {
+    return [
+      {
+        validator: (rule, val) => {
+          // console.log('form', form)
+          switch (true) {
+            case !Boolean(val):
+              return Promise.reject('确认密码不能为空');
+            case form.getFieldValue('password') !== val:
+              return Promise.reject('两次输入的密码不一致');
+            default:
+              return Promise.resolve();
+          }
+        },
+      },
+    ];
+  },
 };

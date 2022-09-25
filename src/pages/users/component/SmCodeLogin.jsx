@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, message } from 'antd';
 import { loginRule } from 'utils/rules';
 import IconMap from 'components/IconMap';
+import $http from 'api';
 
 const SmCodeLogin = ({ FormItem, Input, form }) => {
   const [disabled, setDisabled] = useState(true);
@@ -11,7 +12,12 @@ const SmCodeLogin = ({ FormItem, Input, form }) => {
   //- 发送验证码组件内部进行发送
   const _sendSmCode = async () => {
     setCurrentStatus(false);
-    setDisabled(true);
+    // 获取手机号码
+    const mobile = form.getFieldValue('mobile');
+    // console.log("mobile: " + mobile);
+    const res = await $http.getSmCode({ mobile });
+    // console.log("res: " + res)
+    message.success(res.msg);
     runTime();
   };
 
