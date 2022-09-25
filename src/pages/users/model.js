@@ -7,7 +7,9 @@ export default {
       ? JSON.parse(sessionStorage.getItem('userProfile'))
       : null,
   },
-  reducers: {},
+  reducers: {
+    updateUserProfile: (state, { payload }) => ({ ...state, ...payload }),
+  },
   effects: {
     *login({ payload }, { put, call, select }) {
       const { data, msg } = yield call($http.userLogin, payload);
@@ -17,6 +19,10 @@ export default {
         return;
       }
       sessionStorage.setItem('userProfile', JSON.stringify(data));
+      yield put({
+        type: 'updateUserProfile',
+        payload: { userInfo: data },
+      });
       console.log(data, msg);
     },
   },
