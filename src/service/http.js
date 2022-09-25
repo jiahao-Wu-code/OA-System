@@ -44,7 +44,7 @@ class Http {
     const defaultOptions = {
       mode: 'cors', //- 支持跨域处理，以cors的形式进行跨域
       headers: {
-        Authorization: sessionStorage.get('token') || null,
+        Authorization: sessionStorage.getItem('token') || null,
       },
     };
 
@@ -61,7 +61,7 @@ class Http {
       .then((res) => {
         //- 获取响应头的token
         const token = res.headers.get('Authorization');
-        token && sessionStorage.set('token', token); //- 获取token，并且存储到sessionStorage里面
+        token && sessionStorage.setItem('token', token); //- 获取token，并且存储到sessionStorage里面
         return res.json();
       })
       .catch(handlerError);

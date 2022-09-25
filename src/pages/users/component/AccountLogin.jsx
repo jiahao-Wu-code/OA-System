@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React from 'react';
-// import { loginRule } from 'utils/rules';
+import { loginRule } from 'utils/rules';
 import IconMap from 'components/IconMap';
 
 /*
@@ -10,13 +10,10 @@ import IconMap from 'components/IconMap';
 const AccountLogin = ({ FormItem, Input }) => {
   return (
     <div>
-      <FormItem name="accountName" /* rules={loginRule.userRule} */ hasFeedback>
+      <FormItem name="accountName" rules={loginRule.userRule} hasFeedback>
         <Input prefix={IconMap.userIcon} placeholder="请输入用户名" />
       </FormItem>
-      <FormItem
-        name="password"
-        /* rules={loginRule.passwordRule} */ hasFeedback
-      >
+      <FormItem name="password" rules={loginRule.passwordRule} hasFeedback>
         <Input
           prefix={IconMap.passwordIcon}
           type="password"

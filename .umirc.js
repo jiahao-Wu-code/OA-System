@@ -7,7 +7,7 @@ export default defineConfig({
   },
   dva: { immer: true },
   alias: {
-    // api: resolve(__dirname, './src/services/'),
+    api: resolve(__dirname, './src/service/'),
     components: resolve(__dirname, './src/components'),
     common: resolve(__dirname, './src/common'),
     // config: resolve(__dirname, './src/utils/config'),
