@@ -1,5 +1,6 @@
 import $http from 'api';
 import { message } from 'antd';
+import { history } from 'umi';
 export default {
   namespace: 'user',
   state: {
@@ -18,12 +19,17 @@ export default {
         message.error(msg);
         return;
       }
+      const routeData = yield call($http.getRouteList);
+      // console.log("routeData", routeData);
       sessionStorage.setItem('userProfile', JSON.stringify(data));
+      sessionStorage.setItem('routeList', JSON.stringify(routeData.data));
       yield put({
         type: 'updateUserProfile',
         payload: { userInfo: data },
       });
-      console.log(data, msg);
+      // console.log(data, msg);
+      // 开始界面跳转
+      history.push(routeData.data[0].route);
     },
   },
 };

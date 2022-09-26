@@ -13,3 +13,9 @@ export const checkedCode = (params) => ajax.get('/checkSmCode', params);
 
 // 重置密码
 export const resetPassword = (params) => ajax.post('/resetPassword', params);
+
+// 检测用户是否登录
+export const queryUserLogin = () => ajax.get('/queryLoginStatus');
+
+// 获取路由表
+export const getRouteList = () => ajax.get('/getRouteList');
