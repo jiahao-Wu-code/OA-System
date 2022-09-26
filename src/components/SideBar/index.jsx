@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { Children } from 'react';
 import logo from 'common/img/logo.svg';
-import { history, Link } from 'umi';
+import { Link } from 'umi';
 import IconMap from 'components/IconMap';
 const SideBar = ({ Sider, Menu, collapse }) => {
   const routeList = sessionStorage.getItem('routeList')
     ? JSON.parse(sessionStorage.getItem('routeList'))
     : [];
-  // console.log(routeList)
-  const pathname = history.location.pathname;
+  const items = [
+    ...routeList?.map((item) => ({
+      key: item._id,
+      icon: IconMap[item.icon],
+      label: <Link to={item.route}>{item.zhName}</Link>,
+      type: IconMap[item.icon],
+    })),
+  ];
+  // console.log(items)
   return (
     <Sider theme="light" className="side-bar" collapsed={collapse}>
       <div className="brand">
@@ -17,8 +24,9 @@ const SideBar = ({ Sider, Menu, collapse }) => {
         </div>
       </div>
       <div className="menu-container">
-        <Menu mode="inline" selectedKeys={pathname}>
-          {routeList?.map((item) => {
+        <Menu mode="inline" items={items}>
+          {/* 处理警告  */}
+          {/* {routeList?.map((item) => {
             return (
               <Menu.Item key={item.route}>
                 <Link to={item.route}>
@@ -27,7 +35,7 @@ const SideBar = ({ Sider, Menu, collapse }) => {
                 </Link>
               </Menu.Item>
             );
-          })}
+          })} */}
         </Menu>
       </div>
     </Sider>

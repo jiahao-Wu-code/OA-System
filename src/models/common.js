@@ -23,8 +23,8 @@ export default {
       if (pathname !== '/users/login' || pathname !== '/users/forgetPassword') {
         if (
           !sessionStorage.getItem('userProfile') ||
-          sessionStorage.getItem('token') ||
-          sessionStorage.getItem('routeList')
+          !sessionStorage.getItem('token') ||
+          !sessionStorage.getItem('routeList')
         ) {
           // 跳转登录界面
           history.replace('/users/login');
