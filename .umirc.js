@@ -18,6 +18,9 @@ export default defineConfig({
   //   { path: '/', component: '@/pages/index' },
   // ],
   fastRefresh: {},
+  dynamicImport: {
+    loading: '@/components/Loading',
+  },
   proxy: {
     '/api': {
       target: 'http://127.0.0.1:7001',
