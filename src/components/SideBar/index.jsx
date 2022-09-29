@@ -24,7 +24,7 @@ const SideBar = ({ Sider, Menu, collapse }) => {
         </div>
       </div>
       <div className="menu-container">
-        <Menu mode="inline" items={items}>
+        <Menu mode="inline" items={items} defaultSelectedKeys={[items[0].key]}>
           {/* 处理警告  */}
           {/* {routeList?.map((item) => {
             return (
