@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from 'react';
 import './index.less';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 const Loading = ({ isShow, part = false }) => {
   const loadingStyle = part
@@ -18,7 +18,7 @@ const Loading = ({ isShow, part = false }) => {
   return (
     <div
       style={{ ...loadingStyle }}
-      className={classnames('loader', 'fullScreen', { hidden: !isShow })}
+      className={classNames('loader', 'fullScreen', { hidden: !isShow })}
     >
       <div className="wrapper">
         <div className="inner"></div>
