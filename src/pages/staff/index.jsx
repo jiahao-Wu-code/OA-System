@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'umi';
 import TableHeader from 'components/TableHeader';
+import FilterForm from './component/FilterForm';
+import SearchContainer from 'components/SearchContainer';
+import TableList from './component/TableList';
 
 const staff = () => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-  const { staffTotal } = useSelector((state) => state.staff);
+  const { staffTotal, staffList } = useSelector((state) => state.staff);
+  const { userInfo } = useSelector((state) => state.user);
+  const { loading } = useSelector((state) => state);
   //  改变当前页数
   const changeCurrentPage = (currentPage) => {
     setPage(currentPage);
@@ -22,7 +27,7 @@ const staff = () => {
   }, []);
 
   return (
-    <div className="main-container">
+    <div className="main-search">
       {/* 表格头部组件 */}
       <TableHeader
         page={page}
@@ -31,6 +36,10 @@ const staff = () => {
         changeCurrentPage={changeCurrentPage}
         interfaceDelMethod="deleteStaffs"
       />
+      {/* 左侧搜索组件 */}
+
+      <SearchContainer render={() => <FilterForm />} />
+      <TableList userInfo={userInfo} staffList={staffList} loading={loading} />
     </div>
   );
 };
