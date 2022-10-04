@@ -4,12 +4,20 @@ import SideBar from '../components/SideBar';
 import CommonHeader from '../components/CommonHeader';
 import NotFound from '../pages/404Page';
 import './BaseLayout.less';
-import { history } from 'umi';
+import { history, useSelector, useDispatch } from 'umi';
+import 'common/css/main.less';
 
 const { Header, Sider, Content } = Layout;
+
 const BaseLayout = ({ children }) => {
-  const [collapse, setCollapse] = useState(false);
-  const changeCollapse = () => setCollapse(!collapse);
+  const { collapse } = useSelector((state) => state.common);
+  const dispatch = useDispatch();
+  const changeCollapse = () => {
+    dispatch({
+      type: 'common/changeCollapse',
+      payload: { collapse: !collapse },
+    });
+  };
   const routeList = JSON.parse(sessionStorage.getItem('routeList'));
   const {
     location: { pathname },
