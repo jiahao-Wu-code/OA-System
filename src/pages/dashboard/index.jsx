@@ -5,23 +5,10 @@ import { useSelector, useDispatch } from 'umi';
 import './css/index.less';
 
 const index = () => {
-  const {
-    amountDataList,
-    pieList,
-    columnList,
-    marriageData,
-    staffData,
-    constellationData,
-  } = useSelector((state) => state.dashboard);
-
-  console.log(
-    amountDataList,
-    pieList,
-    columnList,
-    marriageData,
-    staffData,
-    constellationData,
-  );
+  const { amountDataList, staffData } = useSelector((state) => state.dashboard);
+  // useEffect(()=>{
+  //   window.location.pathname = '/dashboard'
+  // },[])
   return (
     <div className="dashboard-container">
       {amountDataList.map((item, index) => (

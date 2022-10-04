@@ -1,13 +1,18 @@
 import $http from 'api';
 export default {
   namespace: 'common',
-  state: {},
+  state: {
+    collapse: false,
+  },
   subscriptions: {
     setup({ dispatch, history }) {
       // 初始化 查询用户是否登录 ，在app.start()阶段执行
       // console.log("arguments", arguments)
       dispatch({ type: 'queryUserLogin', payload: { history } });
     },
+  },
+  reducers: {
+    changeCollapse: (state, { payload }) => ({ ...state, ...payload }),
   },
   effects: {
     *queryUserLogin({ payload }, { put, call }) {
