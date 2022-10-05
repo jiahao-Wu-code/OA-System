@@ -1,12 +1,36 @@
 import { Tag, Image } from 'antd';
 import { formatYear, formatDate, formatBirth } from 'utils/format';
 import { mapData } from 'utils/mapData';
-const Columns = ({ handleSave, userInfo, openReviewRecord }) => {
+import { staffRule } from 'utils/rules';
+import IconMap from 'components/IconMap';
+
+const Columns = ({
+  handleSave,
+  userInfo,
+  openReviewRecord,
+  openDetailDialog,
+}) => {
+  // 正常渲染字段
   const normalList = [
     {
       title: '姓名',
       dataIndex: 'userName',
       editable: true,
+      render: (userName, { _id }) => (
+        <>
+          <span className="user-name">{userName}</span>
+          <span
+            className="c-p"
+            onClick={(e) => {
+              e.stopPropagation();
+              openDetailDialog(_id);
+            }}
+          >
+            {' '}
+            {IconMap?.detail}
+          </span>
+        </>
+      ),
     },
     {
       title: '联系电话',
@@ -35,7 +59,7 @@ const Columns = ({ handleSave, userInfo, openReviewRecord }) => {
       render: (data) => data?.departmentLeader?.userName || '-',
     },
   ];
-
+  // 管理员渲染字段
   const authList = [
     {
       title: '年龄',
@@ -175,13 +199,34 @@ const Columns = ({ handleSave, userInfo, openReviewRecord }) => {
 
     return {
       ...col,
-      onCell: (record) => ({
-        record,
-        editable: col.editable,
-        dataIndex: col.dataIndex,
-        title: col.title,
-        handleSave,
-      }),
+      onCell: (record) => {
+        //- 创建一个规定编辑表单类型的属性type
+        let type = '';
+
+        switch (col.dataIndex) {
+          case 'onboardingTime':
+            type = 'dateNode';
+            break;
+          case 'gender':
+          case 'education':
+          case 'marriage':
+            type = 'selectNode';
+            break;
+          default:
+            type = 'inputNode';
+            break;
+        }
+
+        return {
+          record,
+          type,
+          editable: col.editable,
+          dataIndex: col.dataIndex,
+          title: col.title,
+          rules: staffRule[col.dataIndex],
+          handleSave,
+        };
+      },
     };
   });
   return renderColumnsList;

@@ -20,5 +20,15 @@ export default {
       yield put({ type: 'saveStaffList', payload: { staffList } });
       yield put({ type: 'saveStaffTotal', payload: { staffTotal } });
     },
+
+    // 获取员工详情
+    *_getStaffDetail({ payload }, { put, call }) {
+      const { data, msg } = yield call($http.getStaffDetail, payload);
+      yield put({ type: 'saveStaffDetail', payload: { staffDetail: data } });
+      yield put({
+        type: 'common/setShowDetailDialog',
+        payload: { isShowDetailDialog: true },
+      });
+    },
   },
 };
