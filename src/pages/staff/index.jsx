@@ -11,19 +11,21 @@ const staff = () => {
   const { staffTotal, staffList } = useSelector((state) => state.staff);
   const { userInfo } = useSelector((state) => state.user);
   const { loading } = useSelector((state) => state);
+
   //  改变当前页数
   const changeCurrentPage = (currentPage) => {
     setPage(currentPage);
     _initStaffList(currentPage);
   };
+
   // 从state 获取员工列表
-  const _initStaffList = (currentPage) =>
+  const _initStaffList = (currentPage = page) =>
     dispatch({
       type: 'staff/_initStaffList',
       payload: { size: 10, page: currentPage },
     });
   useEffect(() => {
-    _initStaffList(page);
+    _initStaffList();
   }, []);
 
   return (
@@ -39,7 +41,12 @@ const staff = () => {
       {/* 左侧搜索组件 */}
 
       <SearchContainer render={() => <FilterForm />} />
-      <TableList userInfo={userInfo} staffList={staffList} loading={loading} />
+      <TableList
+        userInfo={userInfo}
+        staffList={staffList}
+        reloadPage={_initStaffList}
+        loading={loading}
+      />
     </div>
   );
 };

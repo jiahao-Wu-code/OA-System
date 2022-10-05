@@ -3,6 +3,7 @@ export default {
   namespace: 'common',
   state: {
     collapse: false,
+    isShowDetailDialog: false,
   },
   subscriptions: {
     setup({ dispatch, history }) {
@@ -13,6 +14,7 @@ export default {
   },
   reducers: {
     changeCollapse: (state, { payload }) => ({ ...state, ...payload }),
+    setShowDetailDialog: (state, { payload }) => ({ ...state, ...payload }),
   },
   effects: {
     *queryUserLogin({ payload }, { put, call }) {

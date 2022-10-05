@@ -15,3 +15,6 @@ export const updateStaff = (params) => ajax.put('/updateStaff', params);
 
 //- 删除员工信息
 export const deleteStaffs = (params) => ajax.post('/destroyStaff', params);
+
+//- 检测员工用户名或者是手机号码是否已经存在
+export const checkIsExists = (params) => ajax.post('/checkIsExists', params);
