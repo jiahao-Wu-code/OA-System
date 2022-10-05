@@ -23,6 +23,8 @@ import {
   CaretRightOutlined,
   ReloadOutlined,
   FormOutlined,
+  CopyOutlined,
+  CloseCircleOutlined,
 } from '@ant-design/icons';
 
 export default {
@@ -46,8 +48,10 @@ export default {
   'bar-chart': <BarChartOutlined />,
   add: <FileAddOutlined />,
   del: <DeleteOutlined />,
+  close: <CloseCircleOutlined />,
   left: <CaretLeftOutlined />,
   reload: <ReloadOutlined />,
   right: <CaretRightOutlined />,
   detail: <FormOutlined />,
+  copy: <CopyOutlined />,
 };
