@@ -4,11 +4,15 @@ import TableHeader from 'components/TableHeader';
 import FilterForm from './component/FilterForm';
 import SearchContainer from 'components/SearchContainer';
 import TableList from './component/TableList';
+import DrawerComponent from 'components/Drawer';
+import DetailForm from './component/DetailForm';
 
 const staff = () => {
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-  const { staffTotal, staffList } = useSelector((state) => state.staff);
+  const { staffTotal, staffList, staffDetail } = useSelector(
+    (state) => state.staff,
+  );
   const { userInfo } = useSelector((state) => state.user);
   const { loading } = useSelector((state) => state);
 
@@ -46,6 +50,23 @@ const staff = () => {
         staffList={staffList}
         reloadPage={_initStaffList}
         loading={loading}
+      />
+      {/* 使用抽屉组件实现详情信息 */}
+
+      <DrawerComponent
+        title={staffDetail?.userName}
+        _id={staffDetail?._id}
+        interfaceName="deleteStaffs"
+        reloadList={() => {
+          setPage(1);
+          _initStaffList(1);
+        }}
+        render={() => (
+          <DetailForm
+            staffDetail={staffDetail}
+            _initStaffList={_initStaffList}
+          />
+        )}
       />
     </div>
   );
