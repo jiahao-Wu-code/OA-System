@@ -23,6 +23,7 @@ export default {
 
     // 获取员工详情
     *_getStaffDetail({ payload }, { put, call }) {
+      // console.log("payload", payload);
       const { data, msg } = yield call($http.getStaffDetail, payload);
       yield put({ type: 'saveStaffDetail', payload: { staffDetail: data } });
       yield put({

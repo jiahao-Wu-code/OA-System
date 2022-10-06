@@ -61,7 +61,12 @@ const staff = () => {
           setPage(1);
           _initStaffList(1);
         }}
-        render={() => <DetailForm />}
+        render={() => (
+          <DetailForm
+            staffDetail={staffDetail}
+            _initStaffList={_initStaffList}
+          />
+        )}
       />
     </div>
   );

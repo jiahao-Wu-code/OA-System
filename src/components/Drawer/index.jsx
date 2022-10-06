@@ -29,6 +29,7 @@ const DrawerComponent = ({ title, interfaceName, _id, render, reloadList }) => {
       title: '温馨提示',
       content: '确定要删除当前用户信息吗?',
       onOk: _deleteItem,
+      maskClosable: true,
     });
   };
 
@@ -64,9 +65,11 @@ const DrawerComponent = ({ title, interfaceName, _id, render, reloadList }) => {
       placement="right"
       closable={false}
       destroyOnClose={true}
-      width={500}
+      width={800}
       open={isShowDetailDialog}
       extra={extra}
+      maskClosable={true}
+      mask={true}
     >
       {render()}
     </Drawer>
