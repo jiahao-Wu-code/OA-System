@@ -16,9 +16,9 @@ const DetailForm = ({ staffDetail, _initStaffList }) => {
     const newVal = form.getFieldValue([item.itemName]);
     let oldVal = staffDetail[item.itemName];
     if (typeof oldVal === 'object') {
-      oldVal = oldVal._id;
+      oldVal = oldVal?._id;
     }
-    console.log(oldVal, newVal);
+    // console.log(oldVal, newVal);
     try {
       // 判断新旧值是否相同
       if (newVal === oldVal) return;
@@ -107,6 +107,7 @@ const DetailForm = ({ staffDetail, _initStaffList }) => {
       <DatePicker
         placeholder={item.placeholderVal}
         onChange={() => beforeChecked(item)}
+        allowClear={false}
         style={{ width: '100%' }}
       />
     ),

@@ -36,7 +36,7 @@ const DropPopover = ({
 
   // 获取列表
   const _initList = async (page, queryData = {}) => {
-    console.log('queryData', queryData);
+    // console.log('queryData', queryData);
     const {
       data: { total, list },
     } = await $http[interfaceName]({
@@ -53,7 +53,7 @@ const DropPopover = ({
     // console.log(val, searchType, interfaceName);
     const searchData = !val ? {} : { [searchType]: val };
     setPage(1);
-    _initList(searchData);
+    _initList(page, searchData);
   };
 
   const selectItem = (item) => {
