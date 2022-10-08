@@ -14,8 +14,11 @@ const DetailForm = ({ staffDetail, _initStaffList }) => {
   // 提交表单前的验证
   const beforeChecked = async (item) => {
     const newVal = form.getFieldValue([item.itemName]);
-    const oldVal = staffDetail[item.itemName];
-    // console.log(oldData, newData);
+    let oldVal = staffDetail[item.itemName];
+    if (typeof oldVal === 'object') {
+      oldVal = oldVal._id;
+    }
+    console.log(oldVal, newVal);
     try {
       // 判断新旧值是否相同
       if (newVal === oldVal) return;
@@ -67,7 +70,24 @@ const DetailForm = ({ staffDetail, _initStaffList }) => {
     popover: (item) => (
       <Input
         placeholder={item.placeholderVal}
-        addonAfter={<DropPopover />}
+        addonAfter={
+          <DropPopover
+            placeholderVal={item.placeholderVal}
+            interfaceName={item.interfaceName}
+            searchType={item.itemName}
+            getSelectItem={(res) => {
+              console.log(res);
+              form.setFieldsValue({
+                [item.itemName]: res[item.itemName],
+                [item.itemName.split('N')[0]]: res._id,
+              });
+              const reqData = JSON.parse(JSON.stringify(item));
+              reqData.itemName = reqData.itemName.split('N')[0];
+              // console.log(reqData)
+              beforeChecked(reqData);
+            }}
+          />
+        }
         readOnly
       />
     ),
@@ -100,6 +120,8 @@ const DetailForm = ({ staffDetail, _initStaffList }) => {
       initialValues={{
         ...staffDetail,
         onboardingTime: moment(staffDetail.onboardingTime),
+        departmentName: staffDetail?.department?.departmentName,
+        levelName: staffDetail?.level?.levelName,
       }}
     >
       {formList.map((arr, index) => (

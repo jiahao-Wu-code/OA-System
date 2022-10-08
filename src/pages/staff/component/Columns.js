@@ -51,7 +51,7 @@ const Columns = ({
     {
       title: '部门',
       dataIndex: 'department',
-      render: (data) => data?.department || '-',
+      render: (data) => data?.departmentName || '-',
     },
     {
       title: '部门负责人',
