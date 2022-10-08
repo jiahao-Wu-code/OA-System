@@ -1,4 +1,4 @@
-import { Tag, Image } from 'antd';
+import { Tag, Image, Tooltip } from 'antd';
 import { formatYear, formatDate, formatBirth } from 'utils/format';
 import { mapData } from 'utils/mapData';
 import { staffRule } from 'utils/rules';
@@ -105,11 +105,27 @@ const Columns = ({
       title: '银行卡',
       dataIndex: 'bankNumber',
       editable: true,
+      ellipsis: {
+        showTitle: false,
+      },
+      render: (bankNumber) => (
+        <Tooltip placement="topLeft" title={bankNumber}>
+          {bankNumber}
+        </Tooltip>
+      ),
     },
     {
       title: '身份证号',
       dataIndex: 'idNumber',
       editable: true,
+      ellipsis: {
+        showTitle: false,
+      },
+      render: (idNumber) => (
+        <Tooltip placement="topLeft" title={idNumber}>
+          {idNumber}
+        </Tooltip>
+      ),
     },
     {
       title: '毕业院校',

@@ -67,6 +67,7 @@ const DrawerComponent = ({ title, interfaceName, _id, render, reloadList }) => {
       destroyOnClose={true}
       width={800}
       open={isShowDetailDialog}
+      onClose={closeDialog}
       extra={extra}
       maskClosable={true}
       mask={true}

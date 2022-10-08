@@ -37,7 +37,7 @@ export const staffRule = {
   hometown: [
     { required: true, message: '籍贯不能为空' },
     { max: 16, message: '籍贯长度不正确' },
-    { min: 4, message: '籍贯长度不正确' },
+    { min: 2, message: '籍贯长度不正确' },
   ],
   onboardingTime: [
     { type: 'object', required: true, message: '入职时间不能为空' },
