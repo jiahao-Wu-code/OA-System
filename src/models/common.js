@@ -4,6 +4,7 @@ export default {
   state: {
     collapse: false,
     isShowDetailDialog: false,
+    isClearForm: false,
   },
   subscriptions: {
     setup({ dispatch, history }) {
@@ -15,6 +16,8 @@ export default {
   reducers: {
     changeCollapse: (state, { payload }) => ({ ...state, ...payload }),
     setShowDetailDialog: (state, { payload }) => ({ ...state, ...payload }),
+    // 清空搜索表单
+    clearForm: (state, { payload }) => ({ ...state, ...payload }),
   },
   effects: {
     *queryUserLogin({ payload }, { put, call }) {

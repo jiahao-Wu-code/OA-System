@@ -11,6 +11,7 @@ const TableHeader = ({
   size,
   total,
   changeCurrentPage,
+  openAddDialog,
   interfaceDelMethod,
 }) => {
   const { collapse } = useSelector((state) => state.common);
@@ -21,7 +22,13 @@ const TableHeader = ({
       })}
     >
       <div>
-        <Button size="small" shape="round" icon={IconMap.add} className="mr-10">
+        <Button
+          size="small"
+          shape="round"
+          icon={IconMap.add}
+          className="mr-10"
+          onClick={openAddDialog}
+        >
           创建
         </Button>
         <Button size="small" shape="round" icon={IconMap.del} danger>

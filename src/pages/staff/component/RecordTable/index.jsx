@@ -17,7 +17,7 @@ const RecordTable = ({ type, interfaceName, requestData }) => {
     const res = await $http[interfaceName]({ ...requestData, page });
     setSource(res.data.list);
     setTotal(res.data.total);
-    console.log(res);
+    // console.log(res);
   };
 
   const changePage = (page) => {
